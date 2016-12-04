@@ -1,5 +1,5 @@
 FROM ubuntu 
-MAINTAINER Jeganathan Swaminathan <jegan@tektutor.org>
+MAINTAINER Jeganathan Swaminathan <jegan@tektutor.org> <http://www.tektutor.org>
 
 # Let's ensure that all package repositories are up to date 
 RUN apt-get update
@@ -9,28 +9,31 @@ RUN apt-get install -y openssh-server
 RUN sed -i 's|session required pam_loginuid.so|session optional pam_loginuid.so|g' /etc/pam.d/sshd
 RUN mkdir -p /var/run/sshd
 
+# Create an user named jenkins with admin privileges
 RUN adduser --quiet jenkins
 RUN adduser jenkins sudo
 
-# Set password for the jenkins user
+# Set password for the jenkins user as jenkins
 RUN echo "jenkins:jenkins" | chpasswd
 
-# Create Maven Local Repository directory
+# Create Maven Local Repository directory and ensure jenkins user is the owner
 RUN mkdir /home/jenkins/.m2
 RUN chown -R jenkins:jenkins /home/jenkins/.m2/
 
+# Create a project directory volume mount point inside the container 
 RUN mkdir -p /home/jenkins/workspace/HelloDevOps
 RUN chown -R jenkins:jenkins /home/jenkins/workspace/HelloDevOps
+
+# Create a directory inside docker container for mounting your host machine JAVA_HOME 
 RUN mkdir -p /usr/lib/jvm/java-8-openjdk-amd64
 RUN chown -R jenkins:jenkins /usr/lib/jvm/java-8-openjdk-amd64
+
+# Create a directory inside docker continer if you prefer mounting your host machine M3_HOME
 RUN mkdir -p /usr/share/maven
 RUN chown -R jenkins:jenkins /usr/share/maven
-
-RUN export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
-RUN export M2_HOME=/usr/share/maven
-RUN export PATH=$JAVA_HOME/bin:/$M2_HOME/bin:$PATH
 
 # Open SSH Port for jenkins master to ssh into this slave machine
 EXPOSE 22
 
+# Lauch SSH Server once the container is booted as a daemon
 CMD ["/usr/sbin/sshd", "-D"]
