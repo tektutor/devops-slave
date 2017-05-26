@@ -24,6 +24,9 @@ RUN echo "jenkins:jenkins" | chpasswd
 RUN mkdir /home/jenkins/.m2
 RUN chown -R jenkins:jenkins /home/jenkins/.m2/
 
+RUN mkdir -p /home/jenkins/workspace/DockerSlave
+RUN chown -R jenkins:jenkins /home/jenkins/workspace/DockerSlave
+
 # Create a project directory volume mount point inside the container 
 RUN mkdir -p /home/jenkins/workspace/HelloDevOps
 RUN chown -R jenkins:jenkins /home/jenkins/workspace/HelloDevOps
