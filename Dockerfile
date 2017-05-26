@@ -30,6 +30,7 @@ RUN chown -R jenkins:jenkins /home/jenkins/workspace/DockerSlave
 # Create a project directory volume mount point inside the container 
 RUN mkdir -p /home/jenkins/workspace/HelloDevOps
 RUN chown -R jenkins:jenkins /home/jenkins/workspace/HelloDevOps
+COPY . /home/jenkins/workspace/HelloDevOps
 
 # Create a directory inside docker container for mounting your host machine JAVA_HOME 
 RUN mkdir -p /usr/lib/jvm/java-8-openjdk-amd64
