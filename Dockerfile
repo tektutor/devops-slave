@@ -1,10 +1,6 @@
 FROM ubuntu 
 MAINTAINER Jeganathan Swaminathan <jegan@tektutor.org> <http://www.tektutor.org>
 
-ENV http_proxy http://10.19.16.165:8080
-
-ENV https_proxy https://10.19.16.165:8080
-
 # Let's ensure that all package repositories are up to date 
 RUN apt-get update
 
