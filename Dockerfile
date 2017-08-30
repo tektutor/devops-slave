@@ -22,7 +22,7 @@ RUN echo "jenkins:jenkins" | chpasswd
 # Create Maven Local Repository directory and ensure jenkins user is the owner
 RUN mkdir /home/jenkins/.m2
 RUN chown -R jenkins:jenkins /home/jenkins/.m2/
-COPY settings.xml /home/jenkins/.m2
+COPY settings.xml /home/jenkins/.m2/
 
 RUN mkdir -p /home/jenkins/workspace/DockerSlave
 RUN chown -R jenkins:jenkins /home/jenkins/workspace/DockerSlave
