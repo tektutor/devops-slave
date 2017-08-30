@@ -1,0 +1,14 @@
+<settings>
+
+<proxies>
+   <proxy>
+       <id>proxy-conf</id>
+       <active>true</active>
+       <protocol>http</protocol>
+       <host>10.19.16.165</host>
+       <port>8080</port>
+       <nonProxyHosts>localhost</nonProxyHosts>
+   </proxy>
+</proxies>
+
+</settings>
