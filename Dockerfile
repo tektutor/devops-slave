@@ -37,7 +37,7 @@ RUN mkdir -p /usr/share/maven
 RUN chown -R jenkins:jenkins /usr/share/maven
 
 #Install maven inside docker container
-RUN apt-get install -y maven
+RUN apt-get update && apt-get install -y maven
 
 # Open SSH Port for jenkins master to ssh into this slave machine
 EXPOSE 22
